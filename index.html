@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookWander - Your Vintage Book Haven</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: #F1DAC4;
+            background-image: 
+                radial-gradient(#2D3047 1px, transparent 1px),
+                radial-gradient(#2D3047 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            background-attachment: fixed;
+            opacity: 0.9;
+        }
+
+        header {
+            background-color: #2D3047;
+            color: #FFB997;
+            padding: 1rem;
+            border-bottom: 4px solid #FFB997;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: repeating-linear-gradient(
+                45deg,
+                #FF9777,
+                #FF9777 10px,
+                #FFB997 10px,
+                #FFB997 20px
+            );
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #FF9777;
+            text-shadow: 2px 2px #1D1D2C;
+            font-family: 'Courier New', Courier, monospace;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border: 3px solid #FF9777;
+            background: #2D3047;
+            transform: rotate(-2deg);
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px dashed #FF9777;
+            z-index: -1;
+            transform: rotate(2deg);
+        }
+
+        .nav-links a {
+            color: #FFB997;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #FF9777;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .hero {
+            background-color: #FFFFFF;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid #2D3047;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, #F1DAC4 25%, transparent 25%) -50px 0,
+                linear-gradient(-45deg, #F1DAC4 25%, transparent 25%) -50px 0,
+                linear-gradient(45deg, transparent 75%, #F1DAC4 75%) -50px 0,
+                linear-gradient(-45deg, transparent 75%, #F1DAC4 75%) -50px 0;
+            background-size: 100px 100px;
+            opacity: 0.2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #2D3047;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px #FFB997;
+            position: relative;
+        }
+
+        .hero p {
+            color: #2D3047;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .featured-books {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: #FFFFFF;
+            border-radius: 16px;
+            border: 4px solid #2D3047;
+            position: relative;
+        }
+
+        .featured-books::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 2px dashed #2D3047;
+            border-radius: 8px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .featured-books h2 {
+            color: #2D3047;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FFFFFF;
+            padding: 0 1rem;
+        }
+
+        .featured-books h2::before,
+        .featured-books h2::after {
+            content: '★';
+            color: #FF9777;
+            margin: 0 1rem;
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .book-card {
+            border: 3px solid #2D3047;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            background-color: #FFFFFF;
+            box-shadow: 5px 5px 0px #2D3047;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                #F1DAC4 0px,
+                #F1DAC4 10px,
+                transparent 10px,
+                transparent 20px
+            );
+            opacity: 0.1;
+        }
+
+        .book-card:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: 8px 8px 0px #2D3047;
+        }
+
+        .book-card img {
+            width: 200px;
+            height: 300px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 2px solid #2D3047;
+            position: relative;
+            box-shadow: 3px 3px 0px #A69CAC;
+        }
+
+        .book-card h3 {
+            color: #2D3047;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            position: relative;
+        }
+
+        .price-tag {
+            background: #FF9777;
+            color: #2D3047;
+            padding: 0.5rem 1rem;
+            display: inline-block;
+            transform: rotate(-2deg);
+            margin: 1rem 0;
+            border: 2px solid #2D3047;
+            box-shadow: 2px 2px 0px #2D3047;
+        }
+
+        .btn {
+            background-color: #FF9777;
+            color: #2D3047;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #2D3047;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 3px 3px 0px #2D3047;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: repeating-linear-gradient(
+                45deg,
+                #FFB997 0px,
+                #FFB997 10px,
+                transparent 10px,
+                transparent 20px
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            opacity: 0.2;
+        }
+
+        .btn:hover {
+            background-color: #FFB997;
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0px #2D3047;
+        }
+
+        footer {
+            background-color: #2D3047;
+            color: #FFB997;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 4px solid #FFB997;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(45deg, #FF9777 25%, transparent 25%) -50px 0,
+                linear-gradient(-45deg, #FF9777 25%, transparent 25%) -50px 0;
+            background-size: 100px 100px;
+            opacity: 0.1;
+        }
+
+        /* Decorative corner elements */
+        .featured-books::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-top: 4px solid #2D3047;
+            border-left: 4px solid #2D3047;
+            top: -10px;
+            left: -10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">BookWander</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#categories">Categories</a>
+                <a href="#bestsellers">Bestsellers</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Welcome to BookWander</h1>
+        <p>Where Every Page Takes You on a New Adventure</p>
+        <a href="#browse" class="btn">Explore Our Collection</a>
+    </section>
+
+    <section class="featured-books">
+        <h2>Featured Books</h2>
+        <div class="book-grid">
+            <div class="book-card">
+                <img src="images\The Time Traveler's Library_cover.jpg" alt="Book 1">
+                <h3>The Time Traveler's Library</h3>
+                <p>By Eleanor Swift</p>
+                <div class="price-tag">$19.99</div>
+                <a href="#" class="btn">Add to Cart</a>
+            </div>
+            <div class="book-card">
+                <img src="images\Vintage Dreams_cover.jpg" alt="Book 2">
+                <h3>Vintage Dreams</h3>
+                <p>By Robert Blake</p>
+                <div class="price-tag">$24.99</div>
+                <a href="#" class="btn">Add to Cart</a>
+            </div>
+            <div class="book-card">
+                <img src="images\The Lost Bookshop_cover.jpg" alt="Book 3">
+                <h3>The Lost Bookshop</h3>
+                <p>By Sarah Mills</p>
+                <div class="price-tag">$29.99</div>
+                <a href="#" class="btn">Add to Cart</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 BookWander. All rights reserved.</p>
+    </footer>
+</body>
+</html>
